@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" ng-app="ShoppingCart">
+<head>
+  <meta charset="utf-8">
+  <title>Carrinho de Compras com AngularJS</title>
+    <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body ng-controller="CarrinhoComprasController">
+    <h1>Seu pedido</h1>
+    <div ng-repeat="item in items">
+        <span>{{item.nome}}</span>
+        <input ng-model="item.quantidade"/>
+        <span>{{item.preco | currency}}</span>
+        <span>{{item.preco * item.quantidade | currency}}</span>
+        <button ng-click="remove($index)">Excluir</button>
+    </div>
+
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/directives.js"></script>
+
+    <script>
+        function CarrinhoComprasController($scope) {
+            $scope.items = [
+                {nome: "Ipad Mini", quantity: 1, preco: 1590.99},
+                {nome: "Capa para Ipad Mini", quantity: 1, preco: 99.90},
+                {nome: "Fone de ouvido", quantity: 1, preco: 250.90}
+            ];
+
+            $scope.remove = function(index) {
+                $scope.items.splice(index, 1);
+            }
+        }
+    </script>
+
+</body>
+</html>
